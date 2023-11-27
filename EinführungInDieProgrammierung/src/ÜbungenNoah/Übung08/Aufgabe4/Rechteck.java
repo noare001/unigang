@@ -32,19 +32,19 @@ public class Rechteck {
 	 }
 	
 	public Punkt2D getEckeLinksUnten() {
-		return new Punkt2D(x, y+seitenlaengeY);
-	}
-	
-	public Punkt2D getEckeLinksOben() {
 		return new Punkt2D(x, y);
 	}
 	
+	public Punkt2D getEckeLinksOben() {
+		return new Punkt2D(x, y+seitenlaengeY);
+	}
+	
 	public Punkt2D getEckeRechtsUnten() {
-		return new Punkt2D(x+seitenlaengeX, y+seitenlaengeY);
+		return new Punkt2D(x+seitenlaengeX, y);
 	}
 	
 	public Punkt2D getEckeRechtsOben() {
-		return new Punkt2D(x+seitenlaengeX, y);
+		return new Punkt2D(x+seitenlaengeX, y+seitenlaengeY);
 	}
 	
 

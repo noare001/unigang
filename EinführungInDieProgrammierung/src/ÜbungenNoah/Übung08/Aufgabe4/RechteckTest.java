@@ -14,7 +14,11 @@ public class RechteckTest {
 			Rechteck r5 = new Rechteck(-1,4,2,2);
 			System.out.println(r5);
 			
-			System.out.println(r1.schneidet(r5));
+			System.out.print(r1.schneidet(r2) + " ");
+			System.out.print(r1.schneidet(r3) + " ");
+			System.out.print(r1.schneidet(r4) + " ");
+			System.out.print(r1.schneidet(r5) + " ");
+			System.out.println(r3.schneidet(r2));
 	}
 
 }
