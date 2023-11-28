@@ -10,6 +10,10 @@ public class Punkt2D {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public boolean vergleichePunkt(Punkt2D P) {
+		return x == P.getX() && y == P.getY();
+	}
 
 	public double getX() {
 		return x;

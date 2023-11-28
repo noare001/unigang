@@ -21,7 +21,9 @@ public class Rechteck {
 	}
 
 	public boolean schneidet(Rechteck R) {
-
+		
+		if (gleichesRechteck(R)) return true;
+		
 		double schnittmengeUntenLinksX = Math.max(getEckeLinksUnten().getX(), R.getEckeLinksUnten().getX());
 		double schnittmengeUntenLinksY = Math.max(getEckeLinksUnten().getY(), R.getEckeLinksUnten().getY());
 
@@ -29,6 +31,10 @@ public class Rechteck {
 		double schnittmengeObenrechtsY = Math.min(getEckeRechtsOben().getY(), R.getEckeRechtsOben().getY());
 
 		return schnittmengeUntenLinksX < schnittmengeObenRechtsX && schnittmengeUntenLinksY < schnittmengeObenrechtsY;
+	}
+	
+	public boolean gleichesRechteck(Rechteck B) {
+		return getEckeLinksOben().vergleichePunkt(B.getEckeLinksOben()) && getEckeRechtsUnten().vergleichePunkt(B.getEckeRechtsUnten());
 	}
 
 	public Punkt2D getEckeLinksUnten() {
