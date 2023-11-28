@@ -1,4 +1,4 @@
-package ueb07;
+package ÜbungFurkan.ueb07;
 
 import java.util.Arrays;
 

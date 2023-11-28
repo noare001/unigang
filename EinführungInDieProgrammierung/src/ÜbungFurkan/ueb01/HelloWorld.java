@@ -1,4 +1,4 @@
-package ueb01;
+package ÜbungFurkan.ueb01;
 
 public class HelloWorld {
 

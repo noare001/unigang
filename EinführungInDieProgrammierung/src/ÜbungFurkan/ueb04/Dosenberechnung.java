@@ -1,4 +1,4 @@
-package ueb04;
+package ÜbungFurkan.ueb04;
 
 import java.util.Scanner;
 

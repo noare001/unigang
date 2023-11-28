@@ -1,4 +1,4 @@
-package ueb03;
+package ÜbungFurkan.ueb03;
 
 public class AusgabeTest {
 

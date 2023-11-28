@@ -1,4 +1,4 @@
-package ueb08;
+package ÜbungFurkan.ueb08;
 
 public class Dozent {
 

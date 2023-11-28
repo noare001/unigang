@@ -1,4 +1,4 @@
-package ueb02;
+package ÜbungFurkan.ueb02;
 
 public class Polynom {
 	public static void main(String[] args) {
