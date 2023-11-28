@@ -27,6 +27,4 @@ public class Punkt2D {
 		this.y = y;
 	}
 	
-	
-	
 }
