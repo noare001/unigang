@@ -1,0 +1,56 @@
+VL04, Aufgabe 1 (Übung) 
+a) Was versteht man unter der Assoziativität eines Operators?
+--> Die Priorität des Operators. Diese gibt die Klammerung der Rechnungen vor um die reihenfolge der Rechung zu verdeutlichen.
+b) Es sei eine Methode mit folgendem Methodenkopf gegeben:
+ public static void tuWas(long p)
+Welche der folgenden Methodenaufrufe sind korrekt?
+ (i) tuWas(12); --> Richtig
+ (ii) tuWas(3.1415); --> Falsch
+ (iii) int x = tuWas(123L); --> Falsch, da tuWas() nichts zurückgibt.
+c) Kann in einer Prozedur ein Ergebnis zurückgegeben werden?
+--> Nein (Gegenteil ist eine Funktion)
+
+VL04, Aufgabe 2 (Übung)
+a) Wie muss der mathematische Ausdruck 0 ≤ i < 7 als boolescher Ausdruck in Java
+formuliert werden?
+--> if(i >= 0 && i < 7){...}
+
+b) Gegeben seien die folgenden Anweisungen. Beschreiben Sie jeweils, mit
+welchen Schritten und Zwischenergebnissen der Wert des Ausdrucks rechts vom
+Zuweisungsoperator bestimmt wird. Begründen Sie Ihre Antworten.
+1. double erg1 = 13.0 / 4 + 5 / 3 + 11 % 7; 
+2. boolean erg2 = 5 > 3 || (erg2 == false);
+3. String erg3 = "en" + (5 > 4 ? 3 > 4 ? ‘c‘ : ‘d‘ : ‘e‘);
+--> erg1 = 3.25 + 1 + 4 = 8.25
+13.0 ist ein double, weswegen die Division ein double hervorbringt. 
+Bei 5 / 3 wird auf 1 abgerundet, da das eine Rechnung zwischen 2 Integern ist.
+Ansonsten werden Standert Punkt-vor-Strich Regeln beachtet.
+--> erg2 = true, da 5 > 3 true ist.
+--> erg3 = "end", da 5 > 4 true ist schaut man in die if-Abfrage 3 > 4 ? ‘c‘ : ‘d‘ rein. Da kommt 'd' raus.
+
+VL04, Aufgabe 3 (Übung)
+Zeichnen Sie je ein Speicherabbild nach Ausführung der Zeilen 10, 12 und 21 des
+folgenden Programms (Programm im Arbeitsblatt):
+vervierfache(666)
+Zeile 10: x = 1332;
+Zeile 12: y = 2664
+Zeile 21: a = 333; b = 2664;
+
+VL04, Augabe 4 (Übung)
+Überlegen Sie, welche der vier Methodenaufrufe unzulässig sind und begründen Sie
+Ihre Auswahl. Geben Sie bei den zulässigen Aufrufen an, was auf dem Bildschirm
+ausgegeben wird.:
+
+public static void hoppla(long x, long y, double z)...
+
+public static void hoppla(long x, long y, long z)...
+
+public static void hoppla(double x, long y, double z)...
+long a = 333;
+double b = 4.44;
+
+hoppla(a,a,b); // Aufruf 1 --> (long,long,double) ist OK
+hoppla(b,b,b); // Aufruf 2 --> (double, double, double) ist NICHT OK
+hoppla(b,a,b); // Aufruf 3 --> (double, long, double) ist OK
+hoppla(b,a,a); // Aufruf 4 --> (double, long, longs) ist OK, da long zu double gecastet werden kann 
+								und somit die Methode (double,long,long) ausgeführt werden kann

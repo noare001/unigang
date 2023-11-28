@@ -1,0 +1,8 @@
+Aufgabe 01
+
+a)
+Arrays
+b)
+boolean
+c)
+arr[2].length
