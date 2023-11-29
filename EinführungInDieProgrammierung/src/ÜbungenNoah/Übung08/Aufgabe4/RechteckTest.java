@@ -1,6 +1,7 @@
 package ÜbungenNoah.Übung08.Aufgabe4;
 
 import java.util.Arrays;
+import java.io.*;
 
 public class RechteckTest {
 
@@ -23,7 +24,7 @@ public class RechteckTest {
 		System.out.println(r3.schneidet(r2));
 
 		drawSquares(r1, r2);
-
+		
 	}
 
 	public static void drawSquare(Rechteck A, String[][] ans) {
@@ -64,6 +65,6 @@ public class RechteckTest {
 			}
 			System.out.println();
 		}
-	}
+	}		
 
 }
