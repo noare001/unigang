@@ -25,6 +25,8 @@ public class RaetselMain {
 		while (lampe.getTimeRemaining() > 0 && !checkWin()) {
 			waitForMove();
 		}
+		
+		
 		if (lampe.getTimeRemaining() < 0) {
 			System.out.println(
 					"\rFalsche Loesung. Du hast " + (lampe.getTimeRemaining() * (-1)) + 60 + " Minuten gebraucht");
@@ -40,13 +42,7 @@ public class RaetselMain {
 
 		String input = scanner.nextLine();
 		
-		if (input.toUpperCase().equals("LOESUNG")) {
-			showLoesung();
-			return;
-		} else if(input.toUpperCase().equals("HELP")) {
-			help();
-			return;
-		}
+		checkCommands(input);
 
 		if (input.length() == 1 && isValidChar(input.charAt(0))) {
 			if (getWandererByChar(input.charAt(0)).getPosition().equals(lampe.getPosition())) {
@@ -76,6 +72,16 @@ public class RaetselMain {
 
 		statusMessage();
 
+	}
+
+	private static void checkCommands(String input) {
+		if (input.toUpperCase().equals("LOESUNG")) {
+			showLoesung();
+			return;
+		} else if(input.toUpperCase().equals("HELP")) {
+			help();
+			return;
+		}
 	}
 	
 	public static void showLoesung() {
@@ -150,19 +156,7 @@ public class RaetselMain {
 				+ fillLine("  __.-'|'-.__.-'|'-.__  ", ausgabe) + "\r" + ausgabe + "\r"
 				+ fillLine("                        ", ausgabe) + "\r" + ObenUnten);
 	}
-
-	public static boolean checkWin() {
-		return WandererA.getPosition().equals("right") && WandererB.getPosition().equals("right")
-				&& WandererC.getPosition().equals("right") && WandererD.getPosition().equals("right");
-	}
-
-	public static boolean isValidChar(char input) {
-		if ((input == 'a' || input == 'b' || input == 'c' || input == 'd')) {
-			return true;
-		}
-		return false;
-	}
-
+	
 	public static String fillLine(String replacement, String ausgabe) {
 		String ans = "";
 		while (ans.length() < ausgabe.length()) {
@@ -178,6 +172,19 @@ public class RaetselMain {
 		}
 		return ans;
 	}
+
+	public static boolean checkWin() {
+		return WandererA.getPosition().equals("right") && WandererB.getPosition().equals("right")
+				&& WandererC.getPosition().equals("right") && WandererD.getPosition().equals("right");
+	}
+
+	public static boolean isValidChar(char input) {
+		if ((input == 'a' || input == 'b' || input == 'c' || input == 'd')) {
+			return true;
+		}
+		return false;
+	}
+
 
 	public static Wanderer getWandererByChar(char input) {
 		switch (input) {
