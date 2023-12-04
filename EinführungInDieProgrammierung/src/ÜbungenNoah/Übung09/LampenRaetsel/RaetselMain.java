@@ -16,7 +16,10 @@ public class RaetselMain {
 	public static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		System.out.println("Game starting");
+		
+		help();
+		
+		System.out.println("Game starting:");
 		statusMessage();
 
 		while (lampe.getTimeRemaining() > 0 && !checkWin()) {
@@ -36,6 +39,14 @@ public class RaetselMain {
 		System.out.println("\rWait for Move...");
 
 		String input = scanner.nextLine();
+		
+		if (input.toUpperCase().equals("LOESUNG")) {
+			showLoesung();
+			return;
+		} else if(input.toUpperCase().equals("HELP")) {
+			help();
+			return;
+		}
 
 		if (input.length() == 1 && isValidChar(input.charAt(0))) {
 			if (getWandererByChar(input.charAt(0)).getPosition().equals(lampe.getPosition())) {
@@ -66,6 +77,50 @@ public class RaetselMain {
 		statusMessage();
 
 	}
+	
+	public static void showLoesung() {
+		// A und B wechseln Seite
+		makeMove(WandererA, WandererB);
+		statusMessage();
+		
+		// A geht zurück
+		WandererA.changePos();
+		lampe.changePos();
+		statusMessage();
+		
+		// C und D wechseln Seite
+		makeMove(WandererC, WandererD);
+		statusMessage();
+		
+		// B geht zurück
+		WandererB.changePos();
+		lampe.changePos();
+		statusMessage();
+		
+		// A und B wechseln Seite
+		makeMove(WandererA, WandererB);
+		statusMessage();
+		
+		checkWin();
+	}
+	
+	public static void help() {
+		System.out.println(
+				"Aufgabe:\r\n" 
+				+ "Vier Wanderer müssen über eine unbeleuchtete Hängebrücke gehen. Die Brücke\r\n"
+				+ "trägt immer nur zwei Personen gleichzeitig. Für jede Überquerung brauchen sie unbedingt eine Taschenlampe,\r\n"
+				+ "die insgesamt nur 60 Minuten brennt. Die vier Wanderer\r\n"
+				+ "brauchen für den Weg über die Brücke unterschiedlich lange Zeit:\r\n"
+				+ "• Wanderer A braucht 5 Minuten.\r\n"
+				+ "• Wanderer B braucht 10 Minuten.\r\n"
+				+ "• Wanderer C braucht 20 Minuten.\r\n"
+				+ "• Wanderer D braucht 25 Minuten.\r\n"
+				+ "Achtung: Die Gehzeit zählt für jede Überquerung, egal ob hin oder zurück. Gehen\r\n"
+				+ "zwei Wanderer zusammen, zählt immer die Gehzeit des langsamsten.\r\n"
+				+ "Wie kommen die Wanderer in 60 Minuten über die Hängebrücke?\r\n"
+				+ "\rType \"Loesung\" for getting the Solution or type \"Help\" for reading this again\r\n"
+				);
+	}
 
 	public static void statusMessage() {
 		String left = "";
@@ -78,22 +133,22 @@ public class RaetselMain {
 			}
 		}
 		if (lampe.getPosition().equals("left")) {
-			left += "Lampe";
+			left += "Lampe ";
 		} else {
-			right += "Lampe";
+			right += "Lampe ";
 		}
-		String ausgabe = "|  " + left + "  __.-'|'-.__.-'|'-.__  " + right + "  |";
+		String ausgabe = "|  " + left + "='=====|========|====='= " + right + "  |";
 		System.out.println("Time remaining: " + lampe.getTimeRemaining() + " Minuten");
-		
+
 		String ObenUnten = "";
 		for (int i = 0; ausgabe.length() > i; i++) {
 			ObenUnten += "-";
-		}
-		
-		String mitteOben = fillLine("       ,        ,       ", ausgabe);
-		String mitteUnten = fillLine("='=====|========|====='=", ausgabe);
-		
-		System.out.println(ObenUnten + "\r" + mitteOben + "\r" + ausgabe + "\r" + mitteUnten + "\r" + ObenUnten);
+		} 
+
+		System.out.println(ObenUnten + "\r" 
+				+ fillLine("       ,        ,       ", ausgabe) + "\r"
+				+ fillLine("  __.-'|'-.__.-'|'-.__  ", ausgabe) + "\r" + ausgabe + "\r"
+				+ fillLine("                        ", ausgabe) + "\r" + ObenUnten);
 	}
 
 	public static boolean checkWin() {
@@ -111,18 +166,19 @@ public class RaetselMain {
 	public static String fillLine(String replacement, String ausgabe) {
 		String ans = "";
 		while (ans.length() < ausgabe.length()) {
-			if (ans.length() == 0 || ans.length() == ausgabe.length()-1) {
+			if (ans.length() == 0 || ans.length() == ausgabe.length() - 1) {
 				ans += "|";
 			} else {
-				if (ans.length() == ausgabe.indexOf("  __.-'|'-.__.-'|'-.__  ")) {
-					ans+= replacement;
+				if (ans.length() == ausgabe.indexOf("='=====|========|====='=")) {
+					ans += replacement;
 				} else {
-				ans += " ";
-			}}
+					ans += " ";
+				}
+			}
 		}
 		return ans;
 	}
-	
+
 	public static Wanderer getWandererByChar(char input) {
 		switch (input) {
 		case 'a':
