@@ -8,19 +8,20 @@ public class GirokontoTest {
 		Girokonto konto2 = new Girokonto();
 		
 		konto1.einzahlen(100);
+		System.out.println("100€ wurden auf " + konto1.getKontonummer() + " eingezahlt");
 		System.out.println(konto1 + "\n");
 		
 		System.out.println("Auszahlung von 1000€: " + konto1.auszahlen(1000));
 		System.out.println(konto1 + "\n");
 		
-		System.out.println("Auszahlung von 50€: " + konto1.auszahlen(50));
+		System.out.println("Auszahlung von 50€ von " + konto1.getKontonummer() + ": " + konto1.auszahlen(50));
 		System.out.println(konto1 + "\n");
 		
-		System.out.println("Überweisung von 50€: " + konto1.ueberweisung(konto2, 50));
+		System.out.println("Überweisung von 50€ von " + konto1.getKontonummer() + " zu " + konto2.getKontonummer() + ": " + konto1.ueberweisung(konto2, 50));
 		System.out.println(konto1);
 		System.out.println(konto2 + "\n");
 		
-		System.out.println("Überweisung von 100€: " + konto2.ueberweisung(konto1, 100));
+		System.out.println("Überweisung von 100€ von " + konto1.getKontonummer() + " zu " + konto2.getKontonummer() + ": " + konto2.ueberweisung(konto1, 100));
 		System.out.println(konto1);
 		System.out.println(konto2 + "\n");
 	}

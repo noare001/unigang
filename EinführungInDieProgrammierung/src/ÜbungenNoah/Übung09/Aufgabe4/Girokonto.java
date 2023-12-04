@@ -18,20 +18,16 @@ public class Girokonto {
 
 	public void einzahlen(double betrag) {
 		kontostand += betrag;
-		System.out.println(betrag + "€ wurden auf " + kontonummer + " eingezahlt");
 	}
 
 	public boolean auszahlen(double betrag) {
-		if (kontostand > betrag) {
+		if (kontostand >= betrag) {
 			kontostand -= betrag;
-			System.out.println("Auszahlung von " + betrag + "€ von " + kontonummer + " erfolgreich");
 			return true;
-		} else if (dispokredit > betrag) {
+		} else if (dispokredit >= betrag) {
 			dispokredit-= betrag;
-			System.out.println("Auszahlung von " + betrag + "€ von " + kontonummer + " durch Dispokredit erfolgreich");
 			return true;
 		}
-		System.out.println("Auszahlung von " + betrag + "€ von " + kontonummer + " nicht erfolgreich");
 		return false;
 	}
 	
@@ -39,6 +35,8 @@ public class Girokonto {
 		if(auszahlen(betrag)) {
 			zweitesKonto.einzahlen(betrag);
 			return true;
+		} else if (dispokredit >= betrag) {
+			dispokredit-= betrag;
 		}
 		return false;
 	}
