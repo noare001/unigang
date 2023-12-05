@@ -1,0 +1,69 @@
+1. Was ist das Geheimnisprinzip in der Programmierung, und in welchen Situationen
+wird es wichtig?
+//
+Man darf auf mit private gekennzeichnette Attribute/Methoden nur innherhalb der Klasse oder des Objektes dieser Klasse zugreifen.
+Damit kann man selbst bestimmen, auf wie vieles man von außen zugreifen kann.
+---------------------------------------------------------------------------------
+2. Worin besteht der Unterschied zwischen Objekt- und Klassenattributen, und wie
+wird er in Java technisch realisiert?
+//
+Objektattribute hat jedes Objekt einer Klasse für sich. 
+Klassenattribute sind static.
+---------------------------------------------------------------------------------
+3. Wie unterscheidet sich der Aufruf einer Methode innerhalb der sie deklarierenden
+Klasse in Java vom Aufruf derselben Methode außerhalb der Klasse?
+//
+Innerhalb der Klasse, kann man die Methode ausführen ohne einObjekt dieser Klasse zu erzeugen.
+Außerhalb der Klasse brauch man dafür ein Objekt.
+---------------------------------------------------------------------------------
+4. Worin besteht der Unterschied zwischen call by reference und call by value?
+//
+Call by value: Parameter werden beim übergeben (Methoden/Konstruktoren) immer Kopiert
+Call by reference: Es wird der Verweis auf die Speicheradresse übergeben 
+				   (Verändern der übergebeneb Variabel in z.B. einer Methode, wird diese auch außerhalb davon verändern)
+
+---------------------------------------------------------------------------------
+Aufgabe 3
+Vier Wanderer müssen über eine unbeleuchtete Hängebrücke gehen. Die Brücke
+trägt immer nur zwei Personen gleichzeitig. Für jede Überquerung brauchen sie unbedingt eine Taschenlampe, die insgesamt nur 60 Minuten brennt. Die vier Wanderer
+brauchen für den Weg über die Brücke unterschiedlich lange Zeit:
+• Wanderer A braucht 5 Minuten.
+• Wanderer B braucht 10 Minuten.
+• Wanderer C braucht 20 Minuten.
+• Wanderer D braucht 25 Minuten.
+Achtung: Die Gehzeit zählt für jede Überquerung, egal ob hin oder zurück. Gehen
+zwei Wanderer zusammen, zählt immer die Gehzeit des langsamsten.
+Wie kommen die Wanderer in 60 Minuten über die Hängebrücke?
+Die Spielenden lösen das Rätsel, in dem Sie Spielzüge eingeben, dabei wechselt bei
+jedem Spielzug die Richtung. Das Onlinespielprogramm kontrolliert nach jedem Zug,
+ob das Rätsel gelöst ist.
+Beispiel:
+Spielzug 1 (links-nach-rechts) : A, B
+Spielzug 2 (rechts-nach-links): A
+---------------------------------------------------------------------------------
+a)
+Welche „Dinge“ kommen in dem Spiel vor, die mit Objekten modelliert werden
+können? 
+//
+Die Wanderer
+Die Brücke
+Die Taschenlampe
+---------------------------------------------------------------------------------
+Welche Informationen müssen in Objektzuständen gespeichert werden, um den
+aktuellen Spielstand zu erfassen?
+//
+Wanderer: Zeit die dieser zum Überqueren der Brücke braucht
+Brücke: Position der Wanderer. Restzeit die den Wanderern Bleibt
+Taschenlampe: Welche Wanderer sie hat (Auch mit einem boolean machbar)
+---------------------------------------------------------------------------------
+Welche Methoden werden in den Klassen benötigt, damit die Objekte bei der Ausführung von Spielzügen, ihren Zustand ändern?
+//
+Brücke: ueberquere(Wanderer w1, Wanderer w2) | ueberquerer(Wanderer w1) -> Lässt einen/zwei Wanderer über die Brücke gehen, wenn diese
+		die Taschenlampe besitzen und zieht die Zeit von ihrer Restzeit ab
+		getWandererMitLampe() -> returnt den Wanderer, welcher die Taschenlampe besitzt
+Wanderer: gibTaschenlampe(Wanderer w) -> Gibt die Taschenlampe ab, wenn der Wanderer diesen hat
+---------------------------------------------------------------------------------
+Entwerfen Sie ein UML-Diagramm für die Klassen ihres Online-Spiels und tragen
+Sie in das Diagramm, die Attribute und Methoden der benötigten Objekte ein.
+//
+you said that we dont have to... :/
