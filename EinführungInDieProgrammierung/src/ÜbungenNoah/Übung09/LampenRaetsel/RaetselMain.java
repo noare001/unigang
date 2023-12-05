@@ -1,5 +1,6 @@
 package ÜbungenNoah.Übung09.LampenRaetsel;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RaetselMain {
@@ -18,6 +19,9 @@ public class RaetselMain {
 
 	// initialisieren des Scanners für Input
 	public static Scanner scanner = new Scanner(System.in);
+	
+	//initialisieren von moves Liste
+	private static ArrayList<String> moves = new ArrayList<String>();
 
 	/**
 	 * Prints out help and statusmessage at start and runs waitForMove() while
@@ -27,7 +31,6 @@ public class RaetselMain {
 	public static void main(String[] args) {
 
 		help();
-
 		System.out.println("Game starting:");
 		statusMessage();
 
@@ -64,6 +67,7 @@ public class RaetselMain {
 
 			// Wenn move valid is print succes else print fail
 			if (makeMove(getWandererByChar(input.charAt(0)))) {
+				moves.add(input);
 				System.out.println("\rZug gemacht und " + getWandererByChar(input.charAt(0)).getTimeNeeded()
 						+ " Minuten verbraucht");
 			} else {
@@ -77,6 +81,7 @@ public class RaetselMain {
 
 			// Wenn move valid is print success else print fail
 			if (makeMove(getWandererByChar(input.charAt(0)), getWandererByChar(input.charAt(2)))) {
+				moves.add(input);
 				System.out.println("Zug gemacht und " + Math.max(getWandererByChar(input.charAt(0)).getTimeNeeded(),
 						getWandererByChar(input.charAt(2)).getTimeNeeded()) + " Minuten verbraucht");
 			} else {
@@ -111,6 +116,9 @@ public class RaetselMain {
 			return true;
 		case "RESET":
 			reset();
+			return true;
+		case "UNDO":
+			undoMove();
 			return true;
 		default:
 			return false;
@@ -158,6 +166,7 @@ public class RaetselMain {
 		makeMove(WandererA, WandererB);
 		statusMessage();
 
+		// checks Win (obviously won but need win Message)
 		checkWin();
 	}
 
@@ -176,13 +185,16 @@ public class RaetselMain {
 				+ "zwei Wanderer zusammen, zählt immer die Gehzeit des langsamsten.\r\n"
 				+ "Wie kommen die Wanderer in 60 Minuten über die Hängebrücke?\r\n"
 				+ "\rType \"Loesung\" for getting the Solution, type \"Help\" \r\n"
-				+ "for reading this again or type \"Reset\" for reset\r\n");
+				+ "for reading this again, type \"Reset\" for reset\r\n"
+				+ "or type \"undo\" for undo last Move"
+				);
 	}
 
 	/**
 	 * Prints out time remaining and visualisation of game status
 	 */
 	public static void statusMessage() {
+
 		// String for left Side of Bridge
 		String left = "";
 
@@ -216,31 +228,29 @@ public class RaetselMain {
 		System.out.println("Time remaining: " + lampe.getTimeRemaining() + " Minuten");
 
 		// Prints out Kasten mit Visualisierung
-		System.out.println(ObenUnten + "\r" + fillLine("       ,        ,       ", "='=====|========|====='=", ausgabe) + "\r"
-				+ fillLine("  __.-'|'-.__.-'|'-.__  ", "='=====|========|====='=", ausgabe) + "\r" + ausgabe + "\r"
-				+ fillLine("                        ", "='=====|========|====='=", ausgabe) + "\r" + ObenUnten);
+		System.out.println(ObenUnten + "\r" + fillLine("       ,        ,       ", "='=====|========|====='=", ausgabe)
+				+ "\r" + fillLine("  __.-'|'-.__.-'|'-.__  ", "='=====|========|====='=", ausgabe) + "\r" + ausgabe
+				+ "\r" + fillLine("                        ", "='=====|========|====='=", ausgabe) + "\r" + ObenUnten);
 	}
 
 	/**
-	 * finds String pattern in String ausgabe and sets String
-	 * replacement on same starting point as pattern
+	 * finds String pattern in String ausgabe and sets String replacement on same
+	 * starting point as pattern
 	 * 
 	 * @param replacement
 	 * @param pattern
 	 * @param ausgabe
-	 * @return String with replacement on same position as pattern 
+	 * @return String with replacement on same position as pattern
 	 */
 	public static String fillLine(String replacement, String pattern, String ausgabe) {
 		String ans = "";
 		while (ans.length() < ausgabe.length()) {
 			if (ans.length() == 0 || ans.length() == ausgabe.length() - 1) {
 				ans += "|";
+			} else if (ans.length() == ausgabe.indexOf(pattern)) {
+				ans += replacement;
 			} else {
-				if (ans.length() == ausgabe.indexOf(pattern)) {
-					ans += replacement;
-				} else {
-					ans += " ";
-				}
+				ans += " ";
 			}
 		}
 		return ans;
@@ -258,7 +268,7 @@ public class RaetselMain {
 	/**
 	 * 
 	 * @param input
-	 * @return true if char input is a valid char 
+	 * @return true if char input is a valid char
 	 */
 	public static boolean isValidChar(char input) {
 		if ((input == 'a' || input == 'b' || input == 'c' || input == 'd')) {
@@ -282,7 +292,8 @@ public class RaetselMain {
 			return WandererC;
 		case 'd':
 			return WandererD;
-		default: return WandererA; // will never reached
+		default:
+			return WandererA; // will never reached
 		}
 	}
 
@@ -316,6 +327,29 @@ public class RaetselMain {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * undo last move
+	 */
+	public static void undoMove() {
+		if (moves.size() > 0) {
+			String lastMove = moves.get(moves.size()-1);
+			if (lastMove.length() == 1) {
+				getWandererByChar(lastMove.charAt(0)).changePos();
+				lampe.changePos();
+				lampe.setTimeRemaining(lampe.getTimeRemaining() + getWandererByChar(lastMove.charAt(0)).getTimeNeeded());
+				} else {
+					getWandererByChar(lastMove.charAt(0)).changePos();
+					getWandererByChar(lastMove.charAt(2)).changePos();
+					lampe.changePos();
+					lampe.setTimeRemaining(lampe.getTimeRemaining() + Math.max(getWandererByChar(lastMove.charAt(0)).getTimeNeeded(), getWandererByChar(lastMove.charAt(2)).getTimeNeeded()));
+				}
+			System.out.println("\r\nUndo Move succesfull!\r\n");
+			statusMessage();
+		} else {
+			System.out.println("\r\n Undo Move Failed!\r\n");
+		}
 	}
 
 }
