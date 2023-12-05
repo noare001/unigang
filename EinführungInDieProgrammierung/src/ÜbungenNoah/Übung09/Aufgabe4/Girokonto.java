@@ -57,7 +57,7 @@ public class Girokonto {
 		return dispokredit;
 	}
 
-	public int getAnzahlKonten() {
+	public static int getAnzahlKonten() {
 		return anzahlKonten;
 	}
 
