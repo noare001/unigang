@@ -42,7 +42,7 @@ public class RaetselMain {
 
 		String input = scanner.nextLine();
 		
-		checkCommands(input);
+		if (checkCommands(input)) return;
 
 		if (input.length() == 1 && isValidChar(input.charAt(0))) {
 			if (getWandererByChar(input.charAt(0)).getPosition().equals(lampe.getPosition())) {
@@ -74,14 +74,28 @@ public class RaetselMain {
 
 	}
 
-	private static void checkCommands(String input) {
+	private static boolean checkCommands(String input) {
 		if (input.toUpperCase().equals("LOESUNG")) {
 			showLoesung();
-			return;
+			return true;
 		} else if(input.toUpperCase().equals("HELP")) {
 			help();
-			return;
+			return true;
+		} else if(input.toUpperCase().equals("RESET")) {
+			reset();
+			return true;
 		}
+		return false;
+	}
+	
+	public static void reset() {
+		for (Wanderer wanderer : wandererListe) {
+			wanderer.setPosition("left");
+		}
+		lampe.setPosition("left");
+		lampe.setTimeRemaining(60);
+		System.out.println("\r\nGame resetted \r\n");
+		statusMessage();
 	}
 	
 	public static void showLoesung() {
@@ -92,6 +106,7 @@ public class RaetselMain {
 		// A geht zurück
 		WandererA.changePos();
 		lampe.changePos();
+		lampe.setTimeRemaining(lampe.getTimeRemaining() - WandererA.getTimeNeeded());
 		statusMessage();
 		
 		// C und D wechseln Seite
@@ -101,6 +116,7 @@ public class RaetselMain {
 		// B geht zurück
 		WandererB.changePos();
 		lampe.changePos();
+		lampe.setTimeRemaining(lampe.getTimeRemaining() - WandererB.getTimeNeeded());
 		statusMessage();
 		
 		// A und B wechseln Seite
@@ -124,7 +140,8 @@ public class RaetselMain {
 				+ "Achtung: Die Gehzeit zählt für jede Überquerung, egal ob hin oder zurück. Gehen\r\n"
 				+ "zwei Wanderer zusammen, zählt immer die Gehzeit des langsamsten.\r\n"
 				+ "Wie kommen die Wanderer in 60 Minuten über die Hängebrücke?\r\n"
-				+ "\rType \"Loesung\" for getting the Solution or type \"Help\" for reading this again\r\n"
+				+ "\rType \"Loesung\" for getting the Solution, type \"Help\" \r\n"
+				+ "for reading this again or type \"Reset\" for reset\r\n"
 				);
 	}
 
