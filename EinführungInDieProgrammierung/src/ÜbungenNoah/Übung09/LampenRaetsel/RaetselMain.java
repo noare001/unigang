@@ -40,7 +40,7 @@ public class RaetselMain {
 
 		if (lampe.getTimeRemaining() < 0) {
 			System.out.println(
-					"\rFalsche Loesung. Du hast " + (lampe.getTimeRemaining() * (-1)) + 60 + " Minuten gebraucht");
+					"\rFalsche Loesung. Du hast " + ((lampe.getTimeRemaining() * (-1)) + 60) + " Minuten gebraucht");
 		} else if (checkWin()) {
 			System.out.println("\rDu hast das Rätsel gelöst!");
 		} else {
