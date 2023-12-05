@@ -46,6 +46,11 @@ public class RaetselMain {
 		} else {
 			System.out.println("\rFalsche Lösung. Du hast keine Zeit mehr übrig!");
 		}
+		
+		System.out.println("\r\nPress Enter for restart...");
+		scanner.nextLine();
+		reset();
+		main(args);
 	}
 
 	/**
