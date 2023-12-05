@@ -60,8 +60,9 @@ public class RaetselMain {
 	public static void waitForMove() {
 		System.out.println("\rWait for Move...");
 
-		// User Input
-		String input = scanner.nextLine();
+		// sets userinput on input and removes unnecessary leerzeichen
+		String input = removeExtraSpaces(scanner.nextLine());
+		
 
 		// Wenn command found end Method
 		if (checkCommands(input))
@@ -129,16 +130,46 @@ public class RaetselMain {
 			return false;
 		}
 	}
+	
+	/**
+	 * removes leerzeichen vor und nach String
+	 * @param input
+	 * @return input String without leerzeichen vor und danach
+	 */
+	 public static String removeExtraSpaces(String input) {
+	        // Entferne führende und nachfolgende Leerzeichen
+	        input = input.trim();
+	        
+	        // Teile den String an Leerzeichen auf
+	        String[] parts = input.split("\\s+");
+	        
+	        StringBuilder result = new StringBuilder();
+	        
+	        // Durchlaufe die Teile des Strings und füge sie zum Ergebnis hinzu
+	        for (String part : parts) {
+	            // Füge das getrennte Wort zum Ergebnis hinzu
+	            result.append(part).append(" ");
+	        }
+	        
+	        // Entferne das letzte Leerzeichen und gib das Ergebnis zurück
+	        return result.toString().trim();
+	    }
 
 	/**
 	 * resets Game and prints statusMessage
 	 */
 	public static void reset() {
+		//Setze Position aller Wanderer in WandererListe auf Left
 		for (Wanderer wanderer : wandererListe) {
 			wanderer.setPosition("left");
 		}
+		
+		//setze Position von Lampe auf left
 		lampe.setPosition("left");
+		
+		//setze Time Remaining auf 60
 		lampe.setTimeRemaining(60);
+		
 		System.out.println("\r\nGame resetted \r\n");
 		statusMessage();
 	}
@@ -276,10 +307,7 @@ public class RaetselMain {
 	 * @return true if char input is a valid char
 	 */
 	public static boolean isValidChar(char input) {
-		if ((input == 'a' || input == 'b' || input == 'c' || input == 'd')) {
-			return true;
-		}
-		return false;
+		return input == 'a' || input == 'A' || input == 'b' || input == 'B' || input == 'c' || input == 'C' || input == 'd' || input == 'D';
 	}
 
 	/**
@@ -289,13 +317,13 @@ public class RaetselMain {
 	 */
 	public static Wanderer getWandererByChar(char input) {
 		switch (input) {
-		case 'a':
+		case 'a', 'A':
 			return WandererA;
-		case 'b':
+		case 'b', 'B':
 			return WandererB;
-		case 'c':
+		case 'c', 'C':
 			return WandererC;
-		case 'd':
+		case 'd', 'D':
 			return WandererD;
 		default:
 			return WandererA; // will never reached
@@ -350,6 +378,7 @@ public class RaetselMain {
 					lampe.changePos();
 					lampe.setTimeRemaining(lampe.getTimeRemaining() + Math.max(getWandererByChar(lastMove.charAt(0)).getTimeNeeded(), getWandererByChar(lastMove.charAt(2)).getTimeNeeded()));
 				}
+			moves.remove(moves.size()-1);
 			System.out.println("\r\nUndo Move succesfull!\r\n");
 			statusMessage();
 		} else {
