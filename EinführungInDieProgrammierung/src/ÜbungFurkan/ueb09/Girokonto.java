@@ -34,7 +34,7 @@ public class Girokonto {
 	}
 	
 	public boolean auszahlen(double betrag) {
-		if(kontostand-dispokredit >= betrag) {
+		if(kontostand+dispokredit >= betrag) {
 			kontostand -= betrag;
 			return true;
 		}

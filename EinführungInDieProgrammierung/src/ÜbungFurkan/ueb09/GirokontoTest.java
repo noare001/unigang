@@ -29,8 +29,8 @@ public class GirokontoTest {
 				"\nÜberweisung erfolgreich?: " + konto3.ueberweisen(konto2, 2000) + 
 				"\nStand danach \nKonto 3: " + konto3.getKontostand() + ", Konto 2: " + konto2.getKontostand());
 		seperator();
-		System.out.println("Nicht erfolgreiches Überweisen wegen Dispokredit \nKonto 1: " + konto1.getKontostand() + ", Konto 3: " + konto3.getKontostand() +
-				"\nÜberweisung erfolgreich?: " + konto1.ueberweisen(konto3, 29000) + 
+		System.out.println("Erfolgreiches Überweisen wegen Dispokredit \nKonto 1: " + konto1.getKontostand() + ", Konto 3: " + konto3.getKontostand() +
+				"\nÜberweisung erfolgreich?: " + konto1.ueberweisen(konto3, 30000) + 
 				"\nStand danach \nKonto 1: " + konto1.getKontostand() + ", Konto 3: " + konto3.getKontostand());
 		seperator();
 		System.out.println(konto1);
