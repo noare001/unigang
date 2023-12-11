@@ -10,6 +10,7 @@ public class Mitarbeiter {
 	public Mitarbeiter(String name, Abteilung abt) {
 		this.name = name;
 		this.abt = abt; 
+		abt.addMitarbeiter(this);
 		anzahlMitarbeiter++;
 		personalnummer = anzahlMitarbeiter;
 
@@ -46,5 +47,9 @@ public class Mitarbeiter {
 			}
 		}
 		return kollegen;
+	}
+	
+	public String toString() {
+		return name + " aus " + getAbteilung().getBezeichnung();
 	}
 }
