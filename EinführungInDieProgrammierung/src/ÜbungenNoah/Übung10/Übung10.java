@@ -24,8 +24,6 @@ public class Übung10 {
 //		
 //		b) this.getAbteilung.getMitarbeiter
 //
-//	Aufgabe 3
-//		a)
 	
 	
 	
