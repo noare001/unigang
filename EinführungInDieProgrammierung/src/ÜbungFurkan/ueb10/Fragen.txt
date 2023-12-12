@@ -1,3 +1,16 @@
+Aufgabe 1
+1)
+Damit Objekte miteinander Interagieren/untereinander Informationen austauschen können.
+(Objekte miteinander verknüpfen)
+2)
+In einer Kann Beziehung kann es auch vorkommen, dass ein Objekt keine Assoziation zu einem anderen hat.
+In einer Muss-Beziehung muss das Objekt mindestens eine Assoziation zu einem anderen haben.
+3)
+unidirektionale Assoziationen: 
+Das Obejekt der Assoziierten Klasse weiß nicht, das ein anderes Objekt diesen kennt (Hat keinen Zugriff darauf)
+bidirektionale Assoziationen:
+In dieser Beziehung kennen sich beide Objekte gegenseitig
+
 Aufgabe 2
 a)
 
