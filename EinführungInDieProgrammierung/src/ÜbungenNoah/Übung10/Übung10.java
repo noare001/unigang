@@ -2,11 +2,6 @@ package ÜbungenNoah.Übung10;
 
 public class Übung10 {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
 //	Aufgabe 1
 //		1. Eine Assoziation stellt einen Zusammenhang / eine Beziehung
 //		   zwischen zwei Objekten her.
@@ -23,8 +18,5 @@ public class Übung10 {
 //		a) Wenn this.getAbteilung == Mitarbeiter.getAbteilung return true
 //		
 //		b) this.getAbteilung.getMitarbeiter
-//
-	
-	
 	
 }
