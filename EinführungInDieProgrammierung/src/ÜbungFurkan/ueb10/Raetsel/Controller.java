@@ -44,7 +44,7 @@ public class Controller {
 				}
 			}
 			zeichneStand();
-			if (gewonnen()) {
+			if (gewonnen() && zeit >= 0) {
 				System.out.println("GG");
 			} else {
 				System.out.println("Vielleicht das nächste mal....");
@@ -52,7 +52,7 @@ public class Controller {
 			System.out.println("Type 'y' to play again.");
 			if(!sc.next().toUpperCase().equals("Y")) goAgain = false;
 		}
-
+		sc.close();
 	}
 	
 	public void reset() {

@@ -1,0 +1,82 @@
+Aufgabe 1
+a)
+Oberklassen geben eine Struktur vor, 
+welche diese ihren Unterklassen vererben kann
+--
+Unterklassen erben von einer Oberklasse. Dadurch haben sie 
+den ganzen Inhalt der Oberklasse, welche nicht privat sind.
+Die Ganzen Attribute und Methoden der Oberklasse können dadurch, 
+ohne initialisiert zu werden, in der Unterklasse genutzt werden.
+--
+Einfachvererbung
+--
+Mehrfachvererbung
+--
+Abstrakte Klassen lassen keine Objekte von sich erzeuen.
+--
+Verdecken
+--
+Verbergen
+--
+Überschreiben ist der Prozess, in welchem die von der Oberklasse 
+zur verfügung gestellte Methode in der Unterklasse überschrieben wird
+
+b)
+???
+
+VL11-Aufgabe 2
+class A
+{
+private String name;
+ public A(String name)
+ {
+ this.name = name;
+ }
+
+}
+___________________________________________________________________________
+class B extends A
+{
+public B(String name) !!
+{
+super(name); !!
+}
+}
+___________________________________________________________________________
+class C extends A
+{
+}
+___________________________________________________________________________
+class Haupt
+{
+public static void main(String[] args)
+{
+A einA = new A("Hugo");
+B einB = new B("Paul");
+C einC = new C();
+}
+}
+
+VL11-Aufgabe 3 (Übung)
+a)
+Die Methode public String getBLZ(){} muss in der Klasse Sparkasse ergänzt werden
+b)
+public void kundenkontenAusgeben(){
+	for(int i = 0; i < 6; i++){
+		Kunde kunde = getKunde(i);
+		if(kunde != null){
+			for(int j = 0; j < 8; j++){
+				Bankkonto bankkonto = kunde.getBankkonto(j);
+				if(bankkonto != null) System.out.println(bankkonto);
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+

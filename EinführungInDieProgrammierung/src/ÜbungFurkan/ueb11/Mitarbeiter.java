@@ -1,6 +1,6 @@
-package ÜbungFurkan.ueb10;
+package ÜbungFurkan.ueb11;
 
-public class Mitarbeiter {
+public abstract class Mitarbeiter {
 
 	private String name;
 	private int personalnummer;
@@ -34,9 +34,9 @@ public class Mitarbeiter {
 	
 	public void setAbteilung(Abteilung abt) {
 		if(this.abt != abt) {
-			this.abt = abt;
-			
+			this.abt.removeMitarbeiter(this);
 		}
+		this.abt = abt;
 	}
 	
 	public boolean isKollege(Mitarbeiter ma){
@@ -59,4 +59,6 @@ public class Mitarbeiter {
 	public String toString() {
 		return name + " aus " + getAbteilung().getBezeichnung();
 	}
+	
+	public abstract double berechneGehalt();
 }
