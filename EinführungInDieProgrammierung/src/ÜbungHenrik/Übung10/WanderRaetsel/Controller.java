@@ -1,4 +1,4 @@
-package ÜbungFurkan.ueb10.Raetsel;
+package ÜbungHenrik.Übung10.WanderRaetsel;
 import java.util.Scanner;
 
 public class Controller {
@@ -34,17 +34,17 @@ public class Controller {
 				if (ersteWahl == -1) {
 					System.out.println("Invalid input! Versuche nochmal");
 				} else if (zweiteWahl == -1) {
-					if (!ueberquere(ersteWahl)) {
+					if (!ueberquereSingle(ersteWahl)) {
 						System.out.println("Ohne Lampe kann man doch nicht wandern! :O");
 					}
 				} else {
-					if (!ueberquere(ersteWahl, zweiteWahl)) {
+					if (!ueberquereDouble(ersteWahl, zweiteWahl)) {
 						System.out.println("Ohne Lampe kann man doch nicht wandern! :O");
 					}
 				}
 			}
 			zeichneStand();
-			if (gewonnen() && zeit >= 0) {
+			if (gewonnen()) {
 				System.out.println("GG");
 			} else {
 				System.out.println("Vielleicht das nächste mal....");
@@ -52,7 +52,7 @@ public class Controller {
 			System.out.println("Type 'y' to play again.");
 			if(!sc.next().toUpperCase().equals("Y")) goAgain = false;
 		}
-		sc.close();
+
 	}
 	
 	public void reset() {
@@ -79,7 +79,7 @@ public class Controller {
 		}
 	}
 
-	public boolean ueberquere(int a, int b) {
+	public boolean ueberquereDouble(int a, int b) {
 		Wanderer w1 = wanderer[a];
 		Wanderer w2 = wanderer[b];
 		if (w1.hatUeberquert() == w2.hatUeberquert() && w1.hatUeberquert() == lampeRechts) {
@@ -97,7 +97,7 @@ public class Controller {
 		return false;
 	}
 
-	public boolean ueberquere(int a) {
+	public boolean ueberquereSingle(int a) {
 		Wanderer w1 = wanderer[a];
 		if (w1.hatUeberquert() == lampeRechts) {
 			w1.ueberquere();
