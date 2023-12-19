@@ -9,20 +9,43 @@ Die Ganzen Attribute und Methoden der Oberklasse können dadurch,
 ohne initialisiert zu werden, in der Unterklasse genutzt werden.
 --
 Einfachvererbung
+Eine Klasse erbt direkt nur von 1 Oberklasse.
 --
 Mehrfachvererbung
+Erinr Klasse erbt dirket von mehreren Oberklassen (In java nicht möglich)
 --
-Abstrakte Klassen lassen keine Objekte von sich erzeuen.
+Abstrakte Klassen lassen keine Objekte von sich erzeuen. (Kann nicht instanziiert werden)
 --
 Verdecken
+Attribute die selbst von der Unterklasse nicht gelesen werden können
 --
 Verbergen
+Vererbte Methoden, die in der Unterklasse überschrieben werden
 --
 Überschreiben ist der Prozess, in welchem die von der Oberklasse 
 zur verfügung gestellte Methode in der Unterklasse überschrieben wird
 
 b)
-???
+abstract class GObjekt{
+
+	private static int objektAnzahl = 0;
+	protected int posX;
+	protected int posY;
+	
+	public static void objektHinzufuegen(GObjekt objekt){}
+	
+	public static void objectEntfernen(GObjekt objekt){}
+	
+	public abstract void zeichnen();
+
+}
+
+class GElipse extends GObjekt{
+
+	protected int posX;
+	protected int posY;
+	public void zeichnen(){}
+}
 
 VL11-Aufgabe 2
 class A
@@ -37,13 +60,13 @@ private String name;
 ___________________________________________________________________________
 class B extends A
 {
-public B(String name) !!
+private B(String name)
 {
 super(name); !!
 }
 }
 ___________________________________________________________________________
-class C extends A
+class C extends A !!! Braucht einen Konstruktor der A() etwas übergibt
 {
 }
 ___________________________________________________________________________
@@ -52,7 +75,7 @@ class Haupt
 public static void main(String[] args)
 {
 A einA = new A("Hugo");
-B einB = new B("Paul");
+B einB = new B("Paul"); !!! Darf nicht sein
 C einC = new C();
 }
 }
@@ -62,10 +85,10 @@ a)
 Die Methode public String getBLZ(){} muss in der Klasse Sparkasse ergänzt werden
 b)
 public void kundenkontenAusgeben(){
-	for(int i = 0; i < 6; i++){
+	for(int i = 0; i < 5; i++){
 		Kunde kunde = getKunde(i);
 		if(kunde != null){
-			for(int j = 0; j < 8; j++){
+			for(int j = 0; j < 7; j++){
 				Bankkonto bankkonto = kunde.getBankkonto(j);
 				if(bankkonto != null) System.out.println(bankkonto);
 			}
