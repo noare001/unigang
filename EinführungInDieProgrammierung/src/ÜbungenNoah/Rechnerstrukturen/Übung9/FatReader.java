@@ -66,8 +66,52 @@ public class FatReader {
     public void printRootDir() throws IOException {
     	// TODO Praktikums zum FAT-Verzeichnisaufbau
     	// Falls die Datei mit dem Dateisystem-Image nicht gefunden
-    	// wird, muss wahrscheinlich der Pfad in der main()-Methode
+    	// wird, muss wahrscheinlich der Pfad in der main()-Methode	
     	// angepasst werden!
+    	
+    	Block sector = new Block (512) ; // Speicher reservieren
+    	discImage.readSector(0, sector) ; // Sektor in Speicher lesen
+  
+    	System.out.println(sector);
+    	
+//    	Der erste Eintrag beginnt bei Offset 0x0020 (32 in Dezimal).
+//    	Der zweite Eintrag beginnt bei Offset 0x0020 + 32 = 0x0040 (64 in Dezimal).
+//    	Der dritte Eintrag beginnt bei Offset 0x0040 + 32 = 0x0060 (96 in Dezimal).
+    	
+//    	Hier sind die Bytes für den dritten Eintrag (Offset 0x0060 bis 0x006F):
+//
+//    		0x0060: 20 (Leerzeichen, Dateiname beginnt)
+//    		0x0061: 20 (Leerzeichen, Dateiname fortgesetzt)
+//    		...
+//    		0x006C: 0E (Attribute)
+//    		0x006D: 1F (Weiteres Attribut)
+//    		0x006E: BE (Dateigröße Byte 1)
+//    		0x006F: 5B (Dateigröße Byte 2)
+//
+//    	Die Byte-Reihenfolge ist umgekehrt, da es sich um Little Endian handelt. 
+//    	Um die Dezimalzahl der Dateigröße zu erhalten, musst du die Bytes in der 
+//    	umgekehrten Reihenfolge zusammenführen: 0x5BBE = 23486 in Dezimal.
+    	
+    	System.out.println(sector.getUInt16(64));
+    	
+    	System.out.println("\r\nErster sector aus root");
+    	
+    	discImage.readSector(discImage.getFirstSectorNoOfRootDir(), sector) ; // Sektor in Speicher lesen
+    	System.out.println(sector);
+    	System.out.println(sector.getUInt16(64));
+    	
+    	System.out.println("Aufgabe 2: \r\n");
+    	aufgabe2();
+  }
+    
+    public void aufgabe2() throws IOException {
+    	Block sector = new Block (512) ; // Speicher reservieren
+    	
+    	for (int i = discImage.getFirstSectorNoOfRootDir(); i <= discImage.getMaxRootDirEntries() && i < (discImage.getFirstSectorNoOfRootDir()+50); i++) {
+    		discImage.readSector(i, sector) ; // Sektor in Speicher lesen
+    		System.out.println(sector);
+    		
+    	}
     }
 
 	// **********************************************************************
@@ -89,7 +133,8 @@ public class FatReader {
 
     public static void main(String[] argv) throws IOException {
     	// TODO Hier wenn notwendig den Pfad zum Image anpassen!
-    	FatReader fatReader = new FatReader("rb1-fat.img");
+    	FatReader fatReader = new FatReader("C:\\Users\\conti_mobil\\git\\unigang\\EinführungInDieProgrammierung\\src\\ÜbungenNoah\\Rechnerstrukturen\\Übung9\\rb1-fat.img");
+    	//Aufgabe 1: C:\\Users\\conti_mobil\\git\\unigang\\EinführungInDieProgrammierung\\src\\ÜbungenNoah\\Rechnerstrukturen\\Übung9\\rb1-fat.img
     	//FatReader fatReader = new FatReader("FatNoPartitionTable.dmg");
 
     	fatReader.printRootDir();
