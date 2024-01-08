@@ -19,8 +19,8 @@ public class RaetselMain {
 
 	// initialisieren des Scanners für Input
 	public static Scanner scanner = new Scanner(System.in);
-	
-	//initialisieren von moves Liste
+
+	// initialisieren von moves Liste
 	private static ArrayList<String> moves = new ArrayList<String>();
 
 	/**
@@ -31,7 +31,7 @@ public class RaetselMain {
 	public static void main(String[] args) {
 
 		help();
-		System.out.println("Game starting:");
+		System.out.println("\r\n<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Game starting: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> \r\n");
 		statusMessage();
 
 		while (lampe.getTimeRemaining() > 0 && !checkWin()) {
@@ -46,7 +46,7 @@ public class RaetselMain {
 		} else {
 			System.out.println("\rFalsche Lösung. Du hast keine Zeit mehr übrig!");
 		}
-		
+
 		System.out.println("\r\nPress Enter for restart...");
 		scanner.nextLine();
 		reset();
@@ -58,15 +58,13 @@ public class RaetselMain {
 	 * prüft ob eingabe korrekt ist und führt dementsprechenden Zug aus
 	 */
 	public static void waitForMove() {
-		System.out.println("\rWait for Move...");
+		System.out.println("\rFor Move please type in a String with one or two Letters and a space in between...");
 
 		// sets userinput on input and removes unnecessary leerzeichen
 		String input = removeExtraSpaces(scanner.nextLine());
-		
 
 		// Wenn command found end Method
-		if (checkCommands(input))
-			return;
+		if (checkCommands(input)) return;
 
 		// Wenn nur ein buchstabe und dieser Valid ist
 		if (input.length() == 1 && isValidChar(input.charAt(0))) {
@@ -90,8 +88,8 @@ public class RaetselMain {
 				moves.add(input);
 				System.out.println("Zug gemacht und " + Math.max(getWandererByChar(input.charAt(0)).getTimeNeeded(),
 						getWandererByChar(input.charAt(2)).getTimeNeeded()) + " Minuten verbraucht");
-			} else { 
-				System.out.println("Wanderer sind nicht auf der gleichen Seite wie die Lampe!");
+			} else {
+				System.out.println("Mindestens ein Wanderer ist nicht auf der gleichen Seite wie die Lampe!");
 			}
 
 			// Prints fail and ends method if input not matching format
@@ -130,46 +128,47 @@ public class RaetselMain {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * removes leerzeichen vor und nach String
+	 * 
 	 * @param input
 	 * @return input String without leerzeichen vor und danach
 	 */
-	 public static String removeExtraSpaces(String input) {
-	        // Entferne führende und nachfolgende Leerzeichen
-	        input = input.trim();
-	        
-	        // Teile den String an Leerzeichen auf
-	        String[] parts = input.split("\\s+");
-	        
-	        StringBuilder result = new StringBuilder();
-	        
-	        // Durchlaufe die Teile des Strings und füge sie zum Ergebnis hinzu
-	        for (String part : parts) {
-	            // Füge das getrennte Wort zum Ergebnis hinzu
-	            result.append(part).append(" ");
-	        }
-	        
-	        // Entferne das letzte Leerzeichen und gib das Ergebnis zurück
-	        return result.toString().trim();
-	    }
+	public static String removeExtraSpaces(String input) {
+		// Entferne führende und nachfolgende Leerzeichen
+		input = input.trim();
+
+		// Teile den String an Leerzeichen auf
+		String[] parts = input.split("\\s+");
+
+		StringBuilder result = new StringBuilder();
+
+		// Durchlaufe die Teile des Strings und füge sie zum Ergebnis hinzu
+		for (String part : parts) {
+			// Füge das getrennte Wort zum Ergebnis hinzu
+			result.append(part).append(" ");
+		}
+
+		// Entferne das letzte Leerzeichen und gib das Ergebnis zurück
+		return result.toString().trim();
+	}
 
 	/**
 	 * resets Game and prints statusMessage
 	 */
 	public static void reset() {
-		//Setze Position aller Wanderer in WandererListe auf Left
+		// Setze Position aller Wanderer in WandererListe auf Left
 		for (Wanderer wanderer : wandererListe) {
 			wanderer.setPosition("left");
 		}
-		
-		//setze Position von Lampe auf left
+
+		// setze Position von Lampe auf left
 		lampe.setPosition("left");
-		
-		//setze Time Remaining auf 60
+
+		// setze Time Remaining auf 60
 		lampe.setTimeRemaining(60);
-		
+
 		System.out.println("\r\nGame resetted \r\n");
 		statusMessage();
 	}
@@ -207,23 +206,33 @@ public class RaetselMain {
 	}
 
 	/**
-	 * Prints out tasks of the riddle
+	 * Prints out tasks of the riddle and the commands
 	 */
 	public static void help() {
-		System.out.println("Aufgabe:\r\n"
-				+ "Vier Wanderer müssen über eine unbeleuchtete Hängebrücke gehen. Die Brücke\r\n"
-				+ "trägt immer nur zwei Personen gleichzeitig. Für jede Überquerung brauchen sie unbedingt eine Taschenlampe,\r\n"
-				+ "die insgesamt nur 60 Minuten brennt. Die vier Wanderer\r\n"
-				+ "brauchen für den Weg über die Brücke unterschiedlich lange Zeit:\r\n"
-				+ "• Wanderer A braucht 5 Minuten.\r\n" + "• Wanderer B braucht 10 Minuten.\r\n"
-				+ "• Wanderer C braucht 20 Minuten.\r\n" + "• Wanderer D braucht 25 Minuten.\r\n"
-				+ "Achtung: Die Gehzeit zählt für jede Überquerung, egal ob hin oder zurück. Gehen\r\n"
-				+ "zwei Wanderer zusammen, zählt immer die Gehzeit des langsamsten.\r\n"
-				+ "Wie kommen die Wanderer in 60 Minuten über die Hängebrücke?\r\n"
-				+ "\rType \"Loesung\" for getting the Solution, type \"Help\" \r\n"
-				+ "for reading this again, type \"Reset\" for reset\r\n"
-				+ "or type \"undo\" for undo last Move"
+		// @formatter:off
+		System.out.println(
+				  "****************************************************************************************************************\r\n"
+				+ "*                                                                                                              *\r\n"
+				+ "*  Aufgabe:                                                                                                    *\r\n"
+				+ "*  Vier Wanderer müssen über eine unbeleuchtete Hängebrücke gehen. Die Brücke                                  *\r\n"
+				+ "*  trägt immer nur zwei Personen gleichzeitig. Für jede Überquerung brauchen sie unbedingt eine Taschenlampe,  *\r\n"
+				+ "*  die insgesamt nur 60 Minuten brennt. Die vier Wanderer                                                      *\r\n"
+				+ "*  brauchen für den Weg über die Brücke unterschiedlich lange Zeit:                                            *\r\n"
+				+ "*  • Wanderer A braucht 5 Minuten.                                                                             *\r\n"
+				+ "*  • Wanderer B braucht 10 Minuten.                                                                            *\r\n"
+				+ "*  • Wanderer C braucht 20 Minuten.                                                                            *\r\n" 
+				+ "*  • Wanderer D braucht 25 Minuten.                                                                            *\r\n"
+				+ "*  Achtung: Die Gehzeit zählt für jede Überquerung, egal ob hin oder zurück. Gehen                             *\r\n"
+				+ "*  zwei Wanderer zusammen, zählt immer die Gehzeit des langsamsten.                                            *\r\n"
+				+ "*  Wie kommen die Wanderer in 60 Minuten über die Hängebrücke?                                                 *\r\n"
+				+ "*                                                                                                              *\r\n" 
+				+ "*  Type \"Loesung\" for getting the Solution, type \"Help\"                                                        *\r\n"
+				+ "*  for reading this again, type \"Reset\" for reset                                                              *\r\n"
+				+ "*  or type \"undo\" for undo last Move                                                                           *\r\n"
+				+ "*                                                                                                              *\r\n"
+				+ "****************************************************************************************************************\r\n"
 				);
+		// @formatter:on
 	}
 
 	/**
@@ -307,7 +316,8 @@ public class RaetselMain {
 	 * @return true if char input is a valid char
 	 */
 	public static boolean isValidChar(char input) {
-		return input == 'a' || input == 'A' || input == 'b' || input == 'B' || input == 'c' || input == 'C' || input == 'd' || input == 'D';
+		return input == 'a' || input == 'A' || input == 'b' || input == 'B' || input == 'c' || input == 'C'
+				|| input == 'd' || input == 'D';
 	}
 
 	/**
@@ -361,24 +371,27 @@ public class RaetselMain {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * undo last move
 	 */
 	public static void undoMove() {
 		if (moves.size() > 0) {
-			String lastMove = moves.get(moves.size()-1);
+			String lastMove = moves.get(moves.size() - 1);
 			if (lastMove.length() == 1) {
 				getWandererByChar(lastMove.charAt(0)).changePos();
 				lampe.changePos();
-				lampe.setTimeRemaining(lampe.getTimeRemaining() + getWandererByChar(lastMove.charAt(0)).getTimeNeeded());
-				} else {
-					getWandererByChar(lastMove.charAt(0)).changePos();
-					getWandererByChar(lastMove.charAt(2)).changePos();
-					lampe.changePos();
-					lampe.setTimeRemaining(lampe.getTimeRemaining() + Math.max(getWandererByChar(lastMove.charAt(0)).getTimeNeeded(), getWandererByChar(lastMove.charAt(2)).getTimeNeeded()));
-				}
-			moves.remove(moves.size()-1);
+				lampe.setTimeRemaining(
+						lampe.getTimeRemaining() + getWandererByChar(lastMove.charAt(0)).getTimeNeeded());
+			} else {
+				getWandererByChar(lastMove.charAt(0)).changePos();
+				getWandererByChar(lastMove.charAt(2)).changePos();
+				lampe.changePos();
+				lampe.setTimeRemaining(
+						lampe.getTimeRemaining() + Math.max(getWandererByChar(lastMove.charAt(0)).getTimeNeeded(),
+								getWandererByChar(lastMove.charAt(2)).getTimeNeeded()));
+			}
+			moves.remove(moves.size() - 1);
 			System.out.println("\r\nUndo Move succesfull!\r\n");
 			statusMessage();
 		} else {
