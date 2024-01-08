@@ -1,16 +1,18 @@
 package ÜbungFurkan.Polymorphie;
 
-public class CD implements Medium{
+public class Buch implements Medium{
 
 	private int breite;
+	private double gewicht;
 	
-	public CD(int breite) {
+	public Buch(int breite, double gewicht) {
+		this.gewicht = gewicht;
 		this.breite = breite;
 	}
 	
 	@Override
 	public double getGewicht() {
-		return 1.5;
+		return gewicht;
 	}
 
 	@Override

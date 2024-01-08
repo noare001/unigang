@@ -15,7 +15,10 @@ public class Abteilung {
 	}
 
 	public int getAnzahlMitarbeiter() {
-		return mitarbeiterArray.length;
+		int anzahl = 0;
+		for(Mitarbeiter m : mitarbeiterArray) 
+			if(m != null) anzahl++;
+		return anzahl;
 	}
 
 	public int getAnzahlAngestellte() {
